@@ -20,4 +20,15 @@ class Entry extends Model
     {
         return $this->belongsTo('App\Site');
     }
+
+    public function getIsCreditAttribute()
+    {
+        return $this->type == 'credit' ? true : false;
+    }
+
+    public function getIsDebitAttribute()
+    {
+        // reverse
+        return !$this->is_credit;
+    }
 }

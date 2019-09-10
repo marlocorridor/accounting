@@ -15,4 +15,9 @@ class Series extends Model
     {
         return $this->belongsTo('App\PurchaseOrder');
     }
+
+    public function module()
+    {
+        return $this->belongsTo('App\Module');
+    }
 }

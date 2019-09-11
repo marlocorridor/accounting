@@ -24,7 +24,7 @@ class Series extends Model
     public function getPoDescriptionAttribute()
     {
         $po = $this->purchase_order;
-        return $po ? $this->purchase_order->description : '';
+        return $po ? $this->purchase_order->description : '-';
     }
 
     public function getModuleCodeAttribute()

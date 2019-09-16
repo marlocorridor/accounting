@@ -9,6 +9,7 @@
                     <template slot="option" slot-scope="option">
                         <span class="badge badge-primary">{{ option.code }}</span>
                         {{ option.title }}
+                        <small class="float-right text-uppercase">{{ option.type }}</small>
                     </template>
                 </v-select>
             </div>

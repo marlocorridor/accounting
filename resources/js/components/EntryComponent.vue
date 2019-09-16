@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-2">
                 <select name="site" class="custom-select" :value="site">
-                    <option>Select Site</option>
+                    <option selected="selected">Select Site</option>
                     <option v-for="site in sites" :value="site.id">
                         {{site.name}}
                     </option>

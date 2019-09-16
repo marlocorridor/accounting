@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.VueSelect = require('vue-select');
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +20,13 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// libraries
+Vue.component('v-select', VueSelect.VueSelect)
+// developed
+Vue.component('entry-component', require('./components/EntryComponent.vue').default);
+Vue.component('entries-component', require('./components/EntriesComponent.vue').default);
+Vue.component('debit-credit-selector', require('./components/debit-credit/SelectorComponent.vue').default);
+Vue.component('debit-credit-text-input', require('./components/debit-credit/TextInputComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

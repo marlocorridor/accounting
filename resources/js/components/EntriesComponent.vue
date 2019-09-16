@@ -27,6 +27,7 @@
                     series: null,
                     accounts: null,
                 }],
+                sites: [],
                 nextEntryId: 2,
             }
         },

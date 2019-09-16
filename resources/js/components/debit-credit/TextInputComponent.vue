@@ -1,7 +1,7 @@
 <template>
     <div class="input-group mb-3">
         <input v-if="isCredit" type="text" class="form-control disabled" disabled>
-        <input type="number" step="0.01" class="form-control" placeholder="Amount" v-model.lazy="value">
+        <input type="number" step="0.01" class="form-control text-right" placeholder="Amount" v-model.lazy="value">
         <input v-if="isDebit" type="text" class="form-control disabled" disabled>
     </div>
 </template>

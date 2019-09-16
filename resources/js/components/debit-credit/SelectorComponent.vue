@@ -1,14 +1,11 @@
 <template>
-    <div>
-        <div class="btn-group btn-group-toggle">
-            <label class="btn" v-bind:class="isDebit ? activeClass : 'btn-secondary'">
-                <input v-model="type" value="debit" type="radio" name="type" autocomplete="off"> DR
-            </label>
-            <label class="btn" v-bind:class="isCredit ? activeClass : 'btn-secondary'">
-                <input v-model="type" value="credit" type="radio" name="type" autocomplete="off"> CR
-            </label>
-        </div>
-        <span>Picked: {{ type }}</span>
+    <div class="btn-group btn-group-toggle">
+        <label class="btn" v-bind:class="isDebit ? activeClass : 'btn-secondary'">
+            <input v-model="type" value="debit" type="radio" name="type" autocomplete="off"> DR
+        </label>
+        <label class="btn" v-bind:class="isCredit ? activeClass : 'btn-secondary'">
+            <input v-model="type" value="credit" type="radio" name="type" autocomplete="off"> CR
+        </label>
     </div>
 </template>
 

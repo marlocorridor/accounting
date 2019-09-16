@@ -31,4 +31,14 @@ class Entry extends Model
         // reverse
         return !$this->is_credit;
     }
+
+    public function getDebitAmountAttribute()
+    {
+        return $this->is_debit ? $this->amount : 0;
+    }
+
+    public function getCreditAmountAttribute()
+    {
+        return $this->is_credit ? $this->amount : 0;
+    }
 }

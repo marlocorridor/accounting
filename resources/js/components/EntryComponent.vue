@@ -113,3 +113,15 @@
         }
     }
 </script>
+
+<style type="text/css">
+    button.close {
+        top: 0.25em;
+        right: -15px;
+    }
+
+    .vs__dropdown-toggle {
+        height: 37px;
+        background: white;
+    }
+</style>

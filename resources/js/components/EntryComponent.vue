@@ -2,10 +2,10 @@
     <div class="entry-row">
         <div class="row">
             <div class="col-md-1">
-                <debit-credit-selector v-on:select_type="select_type" v-bind:entry_type="entry_type"></debit-credit-selector>
+                <debit-credit-selector v-model="entry_type" :entry_type="entry_type"></debit-credit-selector>
             </div>
             <div class="col-md-3">
-                <v-select name="test" :getOptionLabel="getOptionLabel" :options="options" v-model="account" label="title" placeholder="Select Accounts">
+                <v-select name="test" :getOptionLabel="getOptionLabel" :options="accounts" v-model="account" label="title" placeholder="Select Accounts">
                     <template slot="option" slot-scope="option">
                         <span class="badge badge-primary">{{ option.code }}</span>
                         {{ option.title }}
@@ -14,19 +14,19 @@
                 </v-select>
             </div>
             <div class="col-md-3">
-                <input class="form-control" type="text" name="description" :value="description">
+                <input class="form-control" type="text" name="description" v-model.lazy="description">
             </div>
             <div class="col-md-2">
-                <select name="site" class="custom-select" :value="site">
+                <select name="site" class="custom-select" v-model="site">
                     <option selected="selected">Select Site</option>
-                    <option v-for="site in sites" :value="site.id">
+                    <option v-for="site in sites" v-bind:value="site.id">
                         {{site.name}}
                     </option>
                 </select>
             </div>
             <div class="col-md-3 position-relative">
-                <debit-credit-text-input v-on:update_value="update_value" v-bind:entry_type="entry_type"></debit-credit-text-input>
-                <button class="position-absolute close" v-on:click="$emit('remove')">
+                <debit-credit-text-input v-model="amount" :amount="amount" :entry_type="entry_type"></debit-credit-text-input>
+                <button class="position-absolute close" v-on:click="remove_entry">
                     &times;
                 </button>
             </div>
@@ -41,20 +41,7 @@
                 name: 'entry-row',
                 activeClass: 'btn-primary',
                 input_name: '',
-                entry_type: 'debit',
-                amount: 0,
-                account: null,
-                site: null,
-                // entry: null,
-                description: null,
-                options: [
-                    {
-                        description: 'description',
-                        code: 'code',
-                        title: 'title',
-                        value: 0,
-                    },
-                ]
+                value: 0,
             }
         },
         props: {
@@ -64,10 +51,6 @@
                     description: 'Default',
                     id: null,
                 }),
-            },
-            accounts: {
-                type: Array,
-                default: () => ([]),
             },
             sites: {
                 type: Array,
@@ -84,26 +67,26 @@
         },
         mounted() {
             console.log('Entry Component mounted.')
-            if ( accounts ) {
-                this.options = accounts;
-            }
             if ( series ) {
                 this.description = series.description;
             }
             console.log('Entry Entry:', this.entry, sites);
         },
         methods: {
-            select_type: function (entry_type) {
-                this.entry_type = entry_type
+            remove_entry: function () {
+                this.$store.commit('REMOVE_ENTRY', this.index)
             },
-            update_value: function (amount) {
-                this.amount = amount
+            select_type: function (entry_type) {
+                this.type = entry_type
+                this.$store.commit('UPDATE_ENTRY_TYPE', this.get_data())
             },
             get_data: function () {
                 return {
+                    id: this.id,
+                    index: this.index,
                     type: this.type,
-                    amount: this.amount,
-                    account: this.account.value,
+                    amount: this.value,
+                    account: this.account ? this.account.id: null,
                     site: this.site,
                     description: this.description,
                 }
@@ -111,7 +94,67 @@
             getOptionLabel: function (option) {
                 return option.code + ' - ' + option.title
             },
-        }
+        },
+        computed: {
+            amount: {
+                get () {
+                    return this.$store.getters.getEntryById(this.index).amount
+                },
+                set (value) {
+                    this.$store.commit('UPDATE_ENTRY_AMOUNT', {
+                        index: this.index,
+                        amount: value
+                    })
+                }
+            },
+            entry_type: {
+                get () {
+                    return this.$store.getters.getEntryById(this.index).type
+                },
+                set (value) {
+                    this.$store.commit('UPDATE_ENTRY_TYPE', {
+                        index: this.index,
+                        type: value
+                    })
+                }
+            },
+            description: {
+                get () {
+                    return this.$store.getters.getEntryById(this.index).description
+                },
+                set (value) {
+                    this.$store.commit('UPDATE_ENTRY_DESCRIPTION', {
+                        index: this.index,
+                        description: value
+                    })
+                }
+            },
+            site: {
+                get () {
+                    return this.$store.getters.getEntryById(this.index).site
+                },
+                set (value) {
+                    this.$store.commit('UPDATE_ENTRY_SITE', {
+                        index: this.index,
+                        site: value
+                    })
+                }
+            },
+            account: {
+                get () {
+                    return this.$store.getters.getEntryById(this.index).account
+                },
+                set (account) {
+                    this.$store.commit('UPDATE_ENTRY_ACCOUNT', {
+                        index: this.index,
+                        account: account
+                    })
+                }
+            },
+            accounts () {
+                return this.$store.getters.allAccounts
+            },
+        },
     }
 </script>
 

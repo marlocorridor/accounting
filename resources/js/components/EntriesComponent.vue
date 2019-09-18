@@ -21,12 +21,20 @@
             v-bind:entry="entry"
             v-bind:index="index"
             v-bind:key="entry.id"
-            v-on:remove="entries.splice(index, 1)"
+            v-bind:amount="entry.amount"
             :series="series"
-            :accounts="accounts"
             :sites="sites"
             >
         </entry-component>
+        <div class="row text-center font-weight-bold">
+            <div class="offset-md-9 col-sm-3">
+                <div>Amount</div>
+                <div class="row">
+                    <label class="col-sm-6">{{ totals.debit }}</label>
+                    <label class="col-sm-6">{{ totals.credit }}</label>
+                </div>
+            </div>
+        </div>
         <button v-on:click="addNewEntry" class="btn btn-primary float-right">Add Entry</button>
     </div>
 </template>
@@ -37,31 +45,55 @@
             return {
                 name: 'entries-component',
                 series: {},
-                accounts: [],
-                entries: [{
-                    id: 1,
-                    series: null,
-                    accounts: null,
-                }],
                 sites: [],
-                nextEntryId: 2,
+                // nextEntryId: 1,
+                totals: {
+                    debit: 0,
+                    credit: 0,
+                }
             }
+        },
+        beforeMount() {
+            console.log('Entries Component Before mounted.')
+            // set data from global
+            this.series = window.series
+            this.sites = window.sites
+
+            this.$store.commit('SET_ACCOUNTS', window.accounts)
         },
         mounted() {
             console.log('Entries Component mounted.')
-            // set data from global
-            this.series = window.series
-            this.accounts = window.accounts
-            this.sites = window.sites
+            this.$nextTick(function () {
+                this.$store.commit('ADD_ENTRY', this.entry_factory())
+                this.$store.commit('ADD_ENTRY', this.entry_factory(true))
+            })
         },
         methods: {
             addNewEntry: function () {
-                this.entries.push({
-                    id: this.nextEntryId++,
-                    series: this.series,
-                    accounts: this.accounts,
-                })
+                this.$store.commit('ADD_ENTRY', this.entry_factory())
+            },
+            entry_factory: function (is_credit) {
+                var _type = is_credit ? 'credit' :'debit'
+                return {
+                    index: this.nextEntryId,
+                    amount: 0,
+                    account: null,
+                    type: _type,
+                    site: null,
+                    description: '',
+                }
             }
-        }
+        },
+        computed: {
+            accounts: function () {
+                return this.$store.getters.allAccounts
+            },
+            entries: function () {
+                return this.$store.getters.allEntries
+            },
+            nextEntryId: function () {
+                return this.$store.getters.allEntries.length
+            }
+        },
     }
 </script>

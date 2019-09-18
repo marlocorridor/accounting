@@ -1,7 +1,8 @@
 <template>
     <div class="input-group mb-3">
         <input v-if="isCredit" type="text" class="form-control disabled" disabled>
-        <input type="number" step="0.01" class="form-control text-right" placeholder="Amount" v-model.lazy="value">
+        <input type="number" step="0.01" class="form-control text-right" placeholder="Amount"
+            :value="prop_amount" @change="update_value">
         <input v-if="isDebit" type="text" class="form-control disabled" disabled>
     </div>
 </template>
@@ -13,7 +14,6 @@
                 name: 'debit-credit-text-input',
                 activeClass: 'btn-primary',
                 input_name: '',
-                value: 0.00,
             }
         },
         props: {
@@ -21,26 +21,29 @@
                 type: String,
                 default: 'debit',
             },
+            amount: {
+                type: Number,
+                default: 0.00,
+            },
         },
         mounted() {
-            console.log('Text Input Component mounted.')
+            console.log('Text Input Component mounted.', this.amount)
         },
-        watch: {
-            value: function (newVal, oldVal) {
-                // if false
-                if (newVal) {
-                    console.log(newVal, 'newVal')
-                }
-                this.$emit('update_value', newVal)
+        methods: {
+            update_value: function (event) {
+                this.$emit('input', parseFloat(event.target.value))
             }
         },
         computed: {
+            prop_amount: function () {
+                return this.amount
+            },
             isDebit: function () {
                 return this.entry_type == 'debit'
             },
             isCredit: function () {
                 return this.entry_type == 'credit'
-            }
+            },
         }
     }
 </script>

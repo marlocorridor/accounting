@@ -10,7 +10,7 @@
             <div class="col-sm-2">Site</div>
             <div class="col-sm-3">
                 <div>Amount</div>
-                <div class="row">
+                <div class="row pl-0 pr-0">
                     <label class="col-sm-6">Debit</label>
                     <label class="col-sm-6">Credit</label>
                 </div>
@@ -27,11 +27,10 @@
             >
         </entry-component>
         <div class="row text-center font-weight-bold">
-            <div class="offset-md-9 col-sm-3">
-                <div>Amount</div>
-                <div class="row">
-                    <label class="col-sm-6">{{ totals.debit }}</label>
-                    <label class="col-sm-6">{{ totals.credit }}</label>
+            <div class="offset-md-9 col-sm-3 pl-0 pr-0">
+                <div class="row font-weight-bold text-monospace" v-bind:class="totalDebit !== totalCredit ? 'text-danger' : ''">
+                    <label class="col-sm-6">{{ totalDebitMoney }}</label>
+                    <label class="col-sm-6">{{ totalCreditMoney }}</label>
                 </div>
             </div>
         </div>
@@ -93,7 +92,19 @@
             },
             nextEntryId: function () {
                 return this.$store.getters.allEntries.length
-            }
+            },
+            totalDebit: function () {
+                return this.$store.getters.totalDebit
+            },
+            totalDebitMoney: function () {
+                return this.$store.getters.totalDebitMoney
+            },
+            totalCredit: function () {
+                return this.$store.getters.totalCredit
+            },
+            totalCreditMoney: function () {
+                return this.$store.getters.totalCreditMoney
+            },
         },
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 pl-0 pr-0">
         <input v-if="isCredit" type="text" class="form-control disabled" disabled>
         <input type="number" step="0.01" class="form-control text-right" placeholder="Amount"
             :value="prop_amount" @change="update_value">

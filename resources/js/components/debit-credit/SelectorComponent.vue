@@ -1,10 +1,10 @@
 <template>
     <div class="btn-group btn-group-toggle">
         <label class="btn" v-bind:class="isDebit ? activeClass : 'btn-secondary'">
-            <input v-model="type" value="debit" type="radio" name="type" autocomplete="off"> DR
+            <input @change="update_value" value="debit" type="radio" name="type" autocomplete="off"> DR
         </label>
         <label class="btn" v-bind:class="isCredit ? activeClass : 'btn-secondary'">
-            <input v-model="type" value="credit" type="radio" name="type" autocomplete="off"> CR
+            <input @change="update_value" value="credit" type="radio" name="type" autocomplete="off"> CR
         </label>
     </div>
 </template>
@@ -26,17 +26,12 @@
             },
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Debit Credit Selector Component mounted.')
             this.type = this.entry_type;
-            console.log('Component mounted.', this.type, this.entry_type)
         },
-        watch: {
-            type: function (newVal, oldVal) {
-                // if false
-                if (newVal) {
-                    console.log(newVal, 'newVal')
-                }
-                this.$emit('select_type', newVal)
+        methods: {
+            update_value: function (event) {
+                this.$emit('input', event.target.value)
             }
         },
         computed: {

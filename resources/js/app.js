@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Vuex = require('vuex');
+
 window.VueSelect = require('vue-select');
 
 /**
@@ -34,6 +36,9 @@ Vue.component('debit-credit-text-input', require('./components/debit-credit/Text
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const store = require('./store').default.store
+
 const app = new Vue({
     el: '#app',
+    store,
 });

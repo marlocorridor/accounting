@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/try', function () {
+    
+    $data = [
+        'series' => App\Series::first()->toJson(),
+        'accounts' => App\Account::all()->toJson(),
+        'sites' => App\Site::all()->toJson(),
+    ];
+
+    return view('series.entries', $data);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -25,7 +25,38 @@ export default {
             },
             getEntryById: (state) => (index) => {
                 return state.entries.find(entry => entry.index === index)
-            }
+            },
+            totals: (state, getters) => (type) => {
+                var debits, total
+
+                debits = getters.doneEntries.filter(entry => {
+                    return entry.type == type
+                })
+
+                total = _.sumBy(debits, (entry) => {
+                    return entry.amount
+                })
+
+                return parseFloat(total)
+            },
+            totalDebit: (state, getters) => {
+                return getters.totals('debit')
+            },
+            totalCredit: (state, getters) => {
+                return getters.totals('credit')
+            },
+            formatter: () => {
+                return new Intl.NumberFormat( undefined, {
+                    style: 'currency',
+                    currency: 'PHP',
+                })
+            },
+            totalDebitMoney: (state, getters) => {
+                return getters.formatter.format( getters.totalDebit )
+            },
+            totalCreditMoney: (state, getters) => {
+                return getters.formatter.format( getters.totalCredit )
+            },
         },
         mutations: {
             SET_ACCOUNTS(state, accounts) {

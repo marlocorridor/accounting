@@ -29,8 +29,8 @@ class SeriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {  
+        return view('series.create');
     }
 
     /**
@@ -50,9 +50,19 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Series $series)
     {
-        //
+        // check if series has attached entries
+            // if true, display details
+            // else, redirect to create
+
+        $series->load(
+            'entries.site', 'entries.account', 'purchase_order', 'module'
+        );
+
+        return view('series.show', [
+            'series' => $series,
+        ]);
     }
 
     /**

@@ -1,7 +1,8 @@
 <template>
     <div class="entry-row">
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 position-relative">
+                <span class="position-absolute check" v-if="is_done" title="Valid">&#10004;</span>
                 <debit-credit-selector v-model="entry_type" :entry_type="entry_type"></debit-credit-selector>
             </div>
             <div class="col-md-3">
@@ -35,6 +36,8 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         data() {
             return {
@@ -96,6 +99,9 @@
             },
         },
         computed: {
+            ...mapGetters([
+                'doneEntries',
+            ]),
             amount: {
                 get () {
                     return this.$store.getters.getEntryById(this.index).amount
@@ -154,6 +160,9 @@
             accounts () {
                 return this.$store.getters.allAccounts
             },
+            is_done () {
+                return _.find(this.doneEntries, {index: this.entry.index}) !== undefined
+            },
         },
     }
 </script>
@@ -162,6 +171,11 @@
     button.close {
         top: 0.25em;
         right: -15px;
+    }
+
+    span.check {
+        left: 1px;
+        top: 0.5em;
     }
 
     .vs__dropdown-toggle {

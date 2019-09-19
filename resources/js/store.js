@@ -20,6 +20,9 @@ export default {
             allEntries: state => {
                 return state.entries
             },
+            allEntriesLength: (state, getters) => {
+                return getters.allEntries.length
+            },
             allAccounts: state => {
                 return state.accounts
             },

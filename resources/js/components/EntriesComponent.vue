@@ -39,6 +39,8 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         data() {
             return {
@@ -84,27 +86,17 @@
             }
         },
         computed: {
-            accounts: function () {
-                return this.$store.getters.allAccounts
-            },
-            entries: function () {
-                return this.$store.getters.allEntries
-            },
-            nextEntryId: function () {
-                return this.$store.getters.allEntries.length
-            },
-            totalDebit: function () {
-                return this.$store.getters.totalDebit
-            },
-            totalDebitMoney: function () {
-                return this.$store.getters.totalDebitMoney
-            },
-            totalCredit: function () {
-                return this.$store.getters.totalCredit
-            },
-            totalCreditMoney: function () {
-                return this.$store.getters.totalCreditMoney
-            },
+            ...mapGetters({
+                entries: 'allEntries',
+                nextEntryId: 'allEntriesLength',
+            }),
+            ...mapGetters([
+                'accounts',
+                'totalDebit',
+                'totalDebitMoney',
+                'totalCredit',
+                'totalCreditMoney',
+            ]),
         },
     }
 </script>

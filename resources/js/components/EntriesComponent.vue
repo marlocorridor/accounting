@@ -47,7 +47,6 @@
                 name: 'entries-component',
                 series: {},
                 sites: [],
-                // nextEntryId: 1,
                 totals: {
                     debit: 0,
                     credit: 0,
@@ -77,7 +76,6 @@
         computed: {
             ...mapGetters({
                 entries: 'allEntries',
-                nextEntryId: 'allEntriesLength',
                 entry_factory: 'entryFactory'
             }),
             ...mapGetters([

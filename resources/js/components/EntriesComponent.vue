@@ -72,23 +72,13 @@
         methods: {
             addNewEntry: function () {
                 this.$store.commit('ADD_ENTRY', this.entry_factory())
-            },
-            entry_factory: function (is_credit) {
-                var _type = is_credit ? 'credit' :'debit'
-                return {
-                    index: this.nextEntryId,
-                    amount: 0,
-                    account: null,
-                    type: _type,
-                    site: null,
-                    description: '',
-                }
             }
         },
         computed: {
             ...mapGetters({
                 entries: 'allEntries',
                 nextEntryId: 'allEntriesLength',
+                entry_factory: 'entryFactory'
             }),
             ...mapGetters([
                 'accounts',

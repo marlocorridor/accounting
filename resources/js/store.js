@@ -60,6 +60,17 @@ export default {
             totalCreditMoney: (state, getters) => {
                 return getters.formatter.format( getters.totalCredit )
             },
+            entryFactory: (state, getters) => (is_credit) => {
+                var _type = is_credit ? 'credit' :'debit'
+                return {
+                    index: getters.allEntriesLength,
+                    amount: 0,
+                    account: null,
+                    type: _type,
+                    site: null,
+                    description: '',
+                }
+            },
         },
         mutations: {
             SET_ACCOUNTS(state, accounts) {

@@ -1,8 +1,7 @@
 <template>
     <div class="entry-row">
         <div class="row">
-            <div class="col-md-1 position-relative">
-                <span class="position-absolute check" v-if="is_done" title="Valid">&#10004;</span>
+            <div class="col-md-1">
                 <debit-credit-selector v-model="entry_type" :entry_type="entry_type"></debit-credit-selector>
             </div>
             <div class="col-md-3">
@@ -26,6 +25,7 @@
                 </select>
             </div>
             <div class="col-md-3 position-relative">
+                <span class="position-absolute check" v-if="is_done" title="Valid">&#10004;</span>
                 <debit-credit-text-input v-model="amount" :amount="amount" :entry_type="entry_type"></debit-credit-text-input>
                 <button class="position-absolute close" v-on:click="remove_entry">
                     &times;

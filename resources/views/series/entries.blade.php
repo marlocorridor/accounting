@@ -19,5 +19,6 @@
         window.series = JSON.parse('{!! $series !!}');
         window.accounts = JSON.parse('{!! $accounts !!}');
         window.sites = JSON.parse('{!! $sites !!}');
+        window.series_show_url = '{!! $series_show_url !!}';
     </script>
 @endsection

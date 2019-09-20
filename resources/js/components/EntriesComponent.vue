@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="offset-md-9 col-md-3 text-right">
+            <div v-if="!is_sent" class="offset-md-9 col-md-3 text-right">
                 <button class="btn btn-outline-secondary" v-on:click="addNewEntry">
                     &#43; Add Entry
                 </button>
@@ -44,6 +44,11 @@
                     :disabled="!(all_entries_valid && all_entries_balance)">
                     Save Entries
                 </button>
+            </div>
+            <div v-else class="offset-md-9 col-md-3 text-right">
+                <a class="btn btn-success" :href="series_show_url">
+                    View Series Data
+                </a>
             </div>
         </div>
     </div>
@@ -69,6 +74,7 @@
             // set data from global
             this.series = window.series
             this.sites = window.sites
+            this.series_show_url = window.series_show_url
 
             this.$store.commit('SET_SERIES', window.series)
             this.$store.commit('SET_ACCOUNTS', window.accounts)
@@ -96,7 +102,8 @@
                 all_entries_valid: 'allEntriesValid',
                 entries: 'allEntries',
                 accounts: 'allAccounts',
-                entry_factory: 'entryFactory'
+                entry_factory: 'entryFactory',
+                is_sent: 'isSuccess',
             }),
             ...mapGetters([
                 'totalDebit',

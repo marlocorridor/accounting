@@ -10,6 +10,7 @@ export default {
             sites: [],
             entries: [],
             series: {},
+            success: false,
         },
         getters: {
             allEntriesValid: (state, getters) => {
@@ -88,6 +89,9 @@ export default {
                     description: '',
                 }
             },
+            isSuccess: state => {
+                return state.success
+            },
         },
         mutations: {
             SET_SERIES(state, series) {
@@ -127,6 +131,7 @@ export default {
                     '/api/entry/' + context.getters.series.id,
                     context.getters.doneEntries
                 ).then(function (response) {
+                    context.state.success = true
                     console.log(response);
                 }).catch(function (error) {
                     console.log(error);

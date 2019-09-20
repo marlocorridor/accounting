@@ -76,6 +76,8 @@
         },
         computed: {
             ...mapGetters({
+                all_entries_balance: 'balancedEntries',
+                all_entries_valid: 'allEntriesValid',
                 entries: 'allEntries',
                 accounts: 'allAccounts',
                 entry_factory: 'entryFactory'

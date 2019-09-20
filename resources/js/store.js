@@ -12,6 +12,12 @@ export default {
             series: {},
         },
         getters: {
+            allEntriesValid: (state, getters) => {
+                return getters.allEntriesLength === getters.doneEntriesLength
+            },
+            balancedEntries: (state, getters) => {
+                return getters.totalDebit === getters.totalCredit
+            },
             series: state => {
                 return state.series
             },
@@ -24,6 +30,9 @@ export default {
                         entry.site &&       // selected
                         entry.amount >= 0   // atleast zero
                 })
+            },
+            doneEntriesLength: (state, getters) => {
+                return getters.doneEntries.length
             },
             allEntries: state => {
                 return state.entries

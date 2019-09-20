@@ -9,8 +9,12 @@ export default {
             accounts: [],
             sites: [],
             entries: [],
+            series: {},
         },
         getters: {
+            series: state => {
+                return state.series
+            },
             doneEntries: state => {
                 // validate
                 return state.entries.filter(entry => {
@@ -73,6 +77,9 @@ export default {
             },
         },
         mutations: {
+            SET_SERIES(state, series) {
+                Vue.set(state, 'series', series)
+            },
             SET_ACCOUNTS(state, accounts) {
                 Vue.set(state, 'accounts', [...accounts])
             },

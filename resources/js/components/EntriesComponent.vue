@@ -59,6 +59,7 @@
             this.series = window.series
             this.sites = window.sites
 
+            this.$store.commit('SET_SERIES', window.series)
             this.$store.commit('SET_ACCOUNTS', window.accounts)
         },
         mounted() {

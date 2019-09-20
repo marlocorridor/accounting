@@ -21,6 +21,7 @@ Route::get('/try', function () {
         'series' => App\Series::first()->toJson(),
         'accounts' => App\Account::all()->toJson(),
         'sites' => App\Site::all()->toJson(),
+        'series_show_url' => route('series.show', App\Series::first()->id),
     ];
 
     return view('series.entries', $data);

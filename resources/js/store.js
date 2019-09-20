@@ -111,6 +111,18 @@ export default {
             UPDATE_ENTRY_SITE(state, entry) {
                 state.entries[entry.index].site = entry.site
             },
-        }
+        },
+        actions: {
+            saveEntries (context) {
+                axios.post(
+                    '/api/entry/' + context.getters.series.id,
+                    context.getters.doneEntries
+                ).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            },
+        },
     })
 }

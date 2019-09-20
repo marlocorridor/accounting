@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->prefix('entry')->group(function () {
+    Route::post('/{series}', 'Admin\SeriesController@create_entries');
+});

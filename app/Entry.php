@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entry extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'series_id',
+        'account_id',
+        'site_id',
+        'amount',
+        'description',
+        'type',
+    ];
+
     public function series()
     {
         return $this->belongsTo('App\Series');

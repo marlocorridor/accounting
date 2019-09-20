@@ -18,7 +18,11 @@ export default {
             doneEntries: state => {
                 // validate
                 return state.entries.filter(entry => {
-                    return entry.type && entry.amount && entry.account && entry.site
+                    return entry.type &&    // selected
+                        entry.description.length && // description not empty
+                        entry.account &&    // selected
+                        entry.site &&       // selected
+                        entry.amount >= 0   // atleast zero
                 })
             },
             allEntries: state => {

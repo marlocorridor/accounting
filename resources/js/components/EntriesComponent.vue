@@ -34,7 +34,18 @@
                 </div>
             </div>
         </div>
-        <button v-on:click="addNewEntry" class="btn btn-primary float-right">Add Entry</button>
+        <div class="row">
+            <div class="offset-md-9 col-md-3">
+                <button class="btn btn-outline-secondary" v-on:click="addNewEntry">
+                    &#43; Add Entry
+                </button>
+                <button class="btn btn-primary"
+                    v-on:click="saveEntries"
+                    :disabled="!(all_entries_valid && all_entries_balance)">
+                    Save Entries
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -72,7 +83,12 @@
         methods: {
             addNewEntry: function () {
                 this.$store.commit('ADD_ENTRY', this.entry_factory())
-            }
+            },
+            saveEntries: function () {
+                if(confirm("Submit Entries?")){
+                    this.$store.dispatch('saveEntries')
+                }
+            },
         },
         computed: {
             ...mapGetters({

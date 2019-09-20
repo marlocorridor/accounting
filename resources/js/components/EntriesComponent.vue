@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="offset-md-9 col-md-3">
+            <div class="offset-md-9 col-md-3 text-right">
                 <button class="btn btn-outline-secondary" v-on:click="addNewEntry">
                     &#43; Add Entry
                 </button>

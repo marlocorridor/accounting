@@ -76,10 +76,10 @@
         computed: {
             ...mapGetters({
                 entries: 'allEntries',
+                accounts: 'allAccounts',
                 entry_factory: 'entryFactory'
             }),
             ...mapGetters([
-                'accounts',
                 'totalDebit',
                 'totalDebitMoney',
                 'totalCredit',

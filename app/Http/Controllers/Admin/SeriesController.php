@@ -45,6 +45,9 @@ class SeriesController extends Controller
             '*.amount' => 'required|numeric|min:0',
             '*.description' => 'required|string|max:200',
             '*.type' => 'required|in:debit,credit',
+        ], [
+            '*.account.id.required' => 'Account is not set',
+            '*.site.required' => 'Please select Site',
         ])->validate(); // automatic error response
 
         // start dabatase transaction

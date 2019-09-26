@@ -37,7 +37,7 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function create_entries (Request $request, Series $series) {
+    public function store_entries (Request $request, Series $series) {
         // validation
         $validator = Validator::make($request->all(), [
             '*.account.id' => 'required|exists:accounts,id',

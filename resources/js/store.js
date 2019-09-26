@@ -140,9 +140,11 @@ export default {
                     context.getters.doneEntries
                 ).then(function (response) {
                     context.state.success = true
+                    context.state.response = response.response.data
                     console.log(response);
                 }).catch(function (error) {
-                    console.log(error);
+                    context.state.success = false
+                    context.state.response = error.response.data
                 })
             },
         },

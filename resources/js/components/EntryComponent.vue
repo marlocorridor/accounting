@@ -1,7 +1,8 @@
 <template>
     <div class="entry-row">
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-1 position-relative">
+                <span class="position-absolute badge badge-secondary index">#{{index+1}}</span>
                 <debit-credit-selector v-model="entry_type" :entry_type="entry_type"></debit-credit-selector>
             </div>
             <div class="col-md-3">
@@ -176,6 +177,10 @@
     span.check {
         left: 1px;
         top: 0.5em;
+    }
+
+    span.index {
+        left: -10px;
     }
 
     .vs__dropdown-toggle {

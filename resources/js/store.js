@@ -11,6 +11,7 @@ export default {
             entries: [],
             series: {},
             success: false,
+            response: {},
         },
         getters: {
             allEntriesValid: (state, getters) => {
@@ -92,6 +93,9 @@ export default {
             isSuccess: state => {
                 return state.success
             },
+            errorMessages: state => {
+                return state.success ? {} : state.response
+            },
         },
         mutations: {
             SET_SERIES(state, series) {
@@ -123,6 +127,10 @@ export default {
             },
             UPDATE_ENTRY_SITE(state, entry) {
                 state.entries[entry.index].site = entry.site
+            },
+            CLEAR_ERRORS(state) {
+                state.response = {}
+                state.success = false
             },
         },
         actions: {

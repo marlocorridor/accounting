@@ -66,4 +66,9 @@ class Series extends Model
         return $this->module_code . '-' . sprintf( '%08d', $this->id );
     }
 
+    public function getHasNoEntriesAttribute($query)
+    {
+        return $this->entries->count() < 1;
+    }
+
 }

@@ -51,6 +51,21 @@
                 </a>
             </div>
         </div>
+        <div v-if="errors.message" class="row">
+            <div class="col-md-12">
+                <h4>
+                    <b>System Message/s: <span class="badge badge-danger">Error</span></b> <small class="text-upper">{{errors.message}}</small>
+                    <button class="position-absolute ml-2 btn btn-outline-secondary btn-sm" v-on:click="clearErrors">
+                        &times;
+                    </button>
+                </h4>
+                <ul>
+                    <li v-for="(error, index) in errors.errors">
+                        #{{++(index.split('.')[0])}} {{error.join(', ')}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -95,6 +110,9 @@
                     this.$store.dispatch('saveEntries')
                 }
             },
+            clearErrors: function () {
+                this.$store.commit('CLEAR_ERRORS')
+            }
         },
         computed: {
             ...mapGetters({
@@ -104,6 +122,7 @@
                 accounts: 'allAccounts',
                 entry_factory: 'entryFactory',
                 is_sent: 'isSuccess',
+                errors: 'errorMessages',
             }),
             ...mapGetters([
                 'totalDebit',

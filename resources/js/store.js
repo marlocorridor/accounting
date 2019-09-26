@@ -143,8 +143,7 @@ export default {
                     context.state.response = response.response.data
                     console.log(response);
                 }).catch(function (error) {
-                    context.state.success = false
-                    context.state.response = error.response.data
+                    context.state.response = error.response ? error.response.data : {};
                 })
             },
         },

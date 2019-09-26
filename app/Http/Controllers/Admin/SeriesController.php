@@ -37,6 +37,17 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
+    public function create_entries (Request $request, Series $series) {
+        $data = [
+            'series' => $series,
+            'accounts' => Account::all()->toJson(),
+            'sites' => Site::all()->toJson(),
+            'series_show_url' => route('series.show', $series),
+        ];
+
+        return view('series.entries', $data);
+    }
+
     public function store_entries (Request $request, Series $series) {
         // validation
         $validator = Validator::make($request->all(), [

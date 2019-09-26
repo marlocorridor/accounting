@@ -31,6 +31,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::namespace('Admin')->group(function (){
+Route::middleware(['auth'])->namespace('Admin')->group(function (){
     Route::resource('series', 'SeriesController');
+    Route::get('series/{series}/entries', 'SeriesController@create_entries')
+        ->name('series.create_entries');
 });

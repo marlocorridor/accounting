@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->prefix('entry')->group(function () {
-    Route::post('/{series}', 'Admin\SeriesController@create_entries');
+    Route::post('/{series}', 'Admin\SeriesController@store_entries');
 });

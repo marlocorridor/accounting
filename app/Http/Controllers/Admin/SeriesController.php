@@ -108,6 +108,9 @@ class SeriesController extends Controller
      */
     public function show(Series $series)
     {
+        if ($series->has_no_entries) {
+            return redirect()->route('series.create_entries', $series);
+        }
         // check if series has attached entries
             // if true, display details
             // else, redirect to create

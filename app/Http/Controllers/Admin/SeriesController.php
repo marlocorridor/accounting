@@ -94,7 +94,10 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $series = new Series($request->all());
+        $series->save();
+
+        return redirect()->route('series.show', $series);
     }
 
     /**

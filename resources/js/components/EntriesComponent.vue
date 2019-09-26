@@ -36,8 +36,8 @@
         </div>
         <div class="row">
             <div v-if="!is_sent" class="offset-md-9 col-md-3 text-right">
-                <button class="btn btn-outline-secondary" v-on:click="addNewEntry">
-                    &#43; Add Entry
+                <button class="btn btn-outline-secondary" v-on:click="addNewEntry" accesskey="A">
+                    &#43; <u>A</u>dd Entry
                 </button>
                 <button class="btn btn-primary"
                     v-on:click="saveEntries"

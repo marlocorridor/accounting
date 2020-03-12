@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Account;
 use App\Entry;
+use App\Module;
 use App\Series;
 use App\Site;
 
@@ -36,7 +37,11 @@ class SeriesController extends Controller
      */
     public function create()
     {  
-        return view('series.create');
+        $modules = Module::all();
+        $data = [
+            'modules' => $modules,
+        ];
+        return view('series.create', $data);
     }
 
     public function create_entries (Request $request, Series $series) {

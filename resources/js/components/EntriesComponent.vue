@@ -81,7 +81,8 @@
                 totals: {
                     debit: 0,
                     credit: 0,
-                }
+                },
+                loading: false,
             }
         },
         beforeMount() {

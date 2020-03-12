@@ -14,9 +14,15 @@
                     <form action="{{ route('series.store') }}" method="POST">
                         @csrf()
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" for="series_number">Series No.</label>
+                            <label class="col-sm-3 col-form-label" for="module_id">Module</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" id="series_number" name="series_number" title="Series Number" placeholder="Series Number">
+                                <select class="custom-select" id="module_id" name="module_id" >
+                                    @foreach($modules as $module)
+                                        <option value="{{$module->id}}" title="{{$module->description}}">
+                                            {{$module->code}} | {{$module->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">

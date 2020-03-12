@@ -5,8 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Series</div>
-
+                <div class="card-header">
+                    <span class="h3">Series</span>
+                    <a href="{{route('series.create')}}" class="btn btn-sm btn-outline-secondary float-right">
+                        &#43; New Series
+                    </a>
+                </div>
                 <div class="card-body">
                     <table class="table">
                         <tr>
